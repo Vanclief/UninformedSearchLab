@@ -48,28 +48,23 @@ function main(maxHeight, initialState, goalState) {
   console.log('Initial State:', init);
   console.log('Goal State:', goal);
 
-
-
-  console.log('Next Valid States', crane.nextValidStates(init));
-  depthFirstSearch(init, goal);
+  // console.log('Next Valid States', crane.nextValidStates(init));
+  console.log('found: ' + depthFirstSearch(init, goal));
 
 }
 
 
-function depthFirstSearch(crane, root, goal) {
-
+function depthFirstSearch(root, goal) {
 
   if (state.compare(root, goal)) {
     return goal;
   }
   let i, child, found;
-  console.log('root', root);
   let children = crane.nextValidStates(root);
-  console.log('children', children);
 
   for (i = 0; i < children.length; i += 1) {
     child = children[i];
-    found = depthFirstSearch(crane, child, goal);
+    found = depthFirstSearch(child, goal);
     if (found) {
       return found;
     }

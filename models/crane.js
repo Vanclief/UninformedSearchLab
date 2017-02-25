@@ -37,7 +37,7 @@ function nextValidStates(stackArray) {
     for (let j = 0; j <= 2; j++) {
       if (!(i == j)) {
         if (isMovementValid(stackArray[i], stackArray[j])) {
-          console.log(i + ' to ' + j);
+          // console.log(i + ' to ' + j);
           // Need to make a copy of the array
           var stacks = stackArray.map(function(arr) {
             return arr.slice();
