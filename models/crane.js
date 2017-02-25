@@ -92,7 +92,6 @@ function getCurrentState() {
 function moveContainer(initialState, origin, destination) {
 
   initStacks(initialState);
-
   let container = pickUpContainer(origin);
   putDownContainer(destination, container);
   return getCurrentState();
