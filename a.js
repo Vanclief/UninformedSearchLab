@@ -17,7 +17,6 @@ let goalState;
 // General variables
 let inputCount = 1; // Counter for input
 
-
 // Create interface for STDIO
 let rl = readline.createInterface({
   input: process.stdin,
@@ -50,39 +49,24 @@ rl.on('line', function(line) {
 function run(maxHeight, initialState, goalState) {
 
   const crane = new Crane(maxHeight, initialState, goalState);
+  let root = crane.nextValidStates(initialState);
+  let init = crane.parseState(initialState);
+  let goal = crane.parseState(goalState);
 
-  crane.nextValidStates(initialState);
+  console.log('MaxHeight:', maxHeight);
+  console.log('initialState:', init);
+  console.log('goalState:', goal);
 
-  var tree = new Tree('one');
 
-  tree._root.children.push(new Node('two'));
-  tree._root.children[0].parent = tree;
 
-  tree._root.children.push(new Node('three'));
-  tree._root.children[1].parent = tree;
 
-  tree._root.children.push(new Node('four'));
-  tree._root.children[2].parent = tree;
+  // console.log(depthFirstSearch(root, goal));
 
-  tree._root.children[0].children.push(new Node('five'));
-  tree._root.children[0].children[0].parent = tree._root.children[0];
+}
 
-  tree._root.children[0].children.push(new Node('six'));
-  tree._root.children[0].children[1].parent = tree._root.children[0];
+function depthFirstSearch(root, goal) {
 
-  tree._root.children[2].children.push(new Node('seven'));
-  tree._root.children[2].children[0].parent = tree._root.children[2];
 
-  // initStackVariables(initialState);
 
-  // tree.traverseDF(function(node) {
-    // console.log(node.data)
-  // });
-
-  // console.log('------');
-
-  // tree.traverseBF(function(node) {
-    // console.log(node.data)
-  // });
 }
 
