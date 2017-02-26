@@ -1,5 +1,6 @@
 var readline = require('readline');
 const Stack = require('./lib/stack');
+const Queue = require('./lib/queue');
 const Crane = require('./models/crane');
 const State = require('./models/state');
 
@@ -17,6 +18,7 @@ var crane;
 var state = new State();
 
 var visited = [];
+var queue = new Queue();
 var movements = [];
 var cost = 0;
 
@@ -48,13 +50,13 @@ function main(maxHeight, initialState, goalState) {
   var goal = state.parse(goalState);
   crane = new Crane(maxHeight);
 
-  // console.log('Max Height:', maxHeight);
-  // console.log('Initial State:', init);
-  // console.log('Goal State:', goal);
+  console.log('Max Height:', maxHeight);
+  console.log('Initial State:', init);
+  console.log('Goal State:', goal);
 
   // console.log('Next Valid States', crane.nextValidStates(init));
 
-  if (!depthFirstSearch(init, goal)) {
+  if (!breathFirstSearch(init, goal)) {
     console.log('No solution found');
   } else {
     console.log(cost);
@@ -66,7 +68,6 @@ function main(maxHeight, initialState, goalState) {
 function printMovements() {
   console.log(movements.join('; '));
 }
-
 
 function depthFirstSearch(node, goal) {
 
@@ -105,6 +106,44 @@ function depthFirstSearch(node, goal) {
 
 }
 
+
+function breathFirstSearch(node, goal) {
+
+  queue.push(node);
+
+  while (queue.length > 0) {
+
+    node = queue.pop();
+
+    console.log('--Searching with Node--');
+    console.log(node);
+
+    if (state.compare(node, goal)) {
+      console.log('--Goal Found--');
+      console.log(goal);
+      return true;
+    }
+
+    visited.push(node);
+    console.log('--Visited Nodes--');
+    console.log(visited);
+
+    var children = crane.nextValidStates(node);
+    console.log('--Posible Actions--');
+    console.log(children);
+
+    for (var i = 0; i < children.length; i++) {
+      child = children[i];
+      if (!visitedContains(child)) {
+        cost += crane.getCostForAction(node, child);
+        movements.push(crane.getActions(node, child));
+        queue.push(child);
+      }
+    }
+
+  }
+}
+
 function visitedContains(stack) {
 
   result = false;
@@ -122,4 +161,3 @@ function visitedContains(stack) {
 
   return result;
 }
-
