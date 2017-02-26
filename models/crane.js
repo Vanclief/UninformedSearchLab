@@ -1,13 +1,13 @@
 const Stack = require('../lib/stack');
 
-let maxHeight;
+var maxHeight;
 
 function crane(height) {
   maxHeight = height;
 }
 
 function moveContainer(stacks, origin, destination) {
-  let container = pickUpContainer(stacks, origin);
+  var container = pickUpContainer(stacks, origin);
   return putDownContainer(stacks, destination, container);
 }
 
@@ -33,16 +33,16 @@ function isMovementValid(stackA, stackB) {
 function getActions(stackA, stackB) {
 
   // TODO make this single func
-  let arr = [];
+  var arr = [];
 
-  for (let i = 0; i <= 2; i++) {
+  for (var i = 0; i <= 2; i++) {
     arr.push(stackA[i].length + stackB[i].length);
   }
 
-  let max = arr.indexOf(Math.max.apply(null, arr));
+  var max = arr.indexOf(Math.max.apply(null, arr));
   arr[max] = -1;
 
-  let second = arr.indexOf(Math.max.apply(null, arr));
+  var second = arr.indexOf(Math.max.apply(null, arr));
 
   return('(' + second + ', ' + max + ')');
 
@@ -50,18 +50,18 @@ function getActions(stackA, stackB) {
 
 function getCostForAction(stackA, stackB) {
 
- let arr = [];
- let result = 1;
+ var arr = [];
+ var result = 1;
 
-  for (let i = 0; i <= 2; i++) {
+  for (var i = 0; i <= 2; i++) {
     arr.push(stackA[i].length + stackB[i].length);
   }
 
-  let max = arr.indexOf(Math.max.apply(null, arr));
+  var max = arr.indexOf(Math.max.apply(null, arr));
   arr[max] = -1;
-  let second = arr.indexOf(Math.max.apply(null, arr));
+  var second = arr.indexOf(Math.max.apply(null, arr));
 
-  let stacksMoved = (Math.abs(max - second));
+  var stacksMoved = (Math.abs(max - second));
 
   return (result + stacksMoved);
 
@@ -70,9 +70,9 @@ function getCostForAction(stackA, stackB) {
 
 function nextValidStates(stackArray) {
 
-  let result = [];
-  for (let i = 0; i <= 2; i++) {
-    for (let j = 0; j <= 2; j++) {
+  var result = [];
+  for (var i = 0; i <= 2; i++) {
+    for (var j = 0; j <= 2; j++) {
       if (!(i == j)) {
         if (isMovementValid(stackArray[i], stackArray[j])) {
           // console.log(i + ' to ' + j);

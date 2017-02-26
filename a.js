@@ -44,8 +44,8 @@ rl.on('line', function(line) {
 
 function main(maxHeight, initialState, goalState) {
 
-  let init = state.parse(initialState);
-  let goal = state.parse(goalState);
+  var init = state.parse(initialState);
+  var goal = state.parse(goalState);
   crane = new Crane(maxHeight);
 
   // console.log('Max Height:', maxHeight);
@@ -85,8 +85,8 @@ function depthFirstSearch(node, goal) {
     return true;
   }
 
-  let i, j, child, found;
-  let children = crane.nextValidStates(node);
+  var i, j, child, found;
+  var children = crane.nextValidStates(node);
   // console.log('--Posible Actions--');
   // console.log(children);
 

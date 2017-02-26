@@ -2,8 +2,8 @@ function state() {}
 
 function parse(string) {
 
-  let stacks = [];
-  let arr = string.replace(/[( )]/g, '').split(';');
+  var stacks = [];
+  var arr = string.replace(/[( )]/g, '').split(';');
 
   stacks.push(arr[0].split(',').filter(Boolean));
   stacks.push(arr[1].split(',').filter(Boolean));
@@ -14,9 +14,9 @@ function parse(string) {
 
 function compare(stackA, stackB) {
 
-  let result = true;
+  var result = true;
 
-  for (let i = 0; i <= 2; i++) {
+  for (var i = 0; i <= 2; i++) {
 
     if (typeof stackA[i] != 'undefined' &&
         typeof stackB[i] != 'undefined' &&
