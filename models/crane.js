@@ -74,7 +74,7 @@ crane.prototype.nextValidStates = function(stackArray) {
   for (var i = 0; i <= 2; i++) {
     for (var j = 0; j <= 2; j++) {
       if (!(i == j)) {
-        if (isMovementValid(stackArray[i], stackArray[j])) {
+        if (this.isMovementValid(stackArray[i], stackArray[j])) {
           // console.log(i + ' to ' + j);
           // Need to make a copy of the array
           var stacks = stackArray.map(function(arr) {
