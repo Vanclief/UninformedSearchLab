@@ -22,7 +22,7 @@ function putDownContainer(stacks, stack, container) {
   return stacks;
 }
 
-function isMovementValid(stackA, stackB) {
+crane.prototype.isMovementValid = function(stackA, stackB) {
   // console.log(stackA + ' to ' + stackB);
   // console.log(!(stackA.length === 0));
   // console.log(stackB.length < maxHeight);
@@ -30,7 +30,7 @@ function isMovementValid(stackA, stackB) {
     stackB.length < maxHeight);
 }
 
-function getActions(stackA, stackB) {
+crane.prototype.getActions = function(stackA, stackB) {
 
   // TODO make this single func
   var arr = [];
@@ -48,7 +48,7 @@ function getActions(stackA, stackB) {
 
 }
 
-function getCostForAction(stackA, stackB) {
+crane.prototype.getCostForAction =  function(stackA, stackB) {
 
  var arr = [];
  var result = 1;
@@ -68,7 +68,7 @@ function getCostForAction(stackA, stackB) {
 }
 
 
-function nextValidStates(stackArray) {
+crane.prototype.nextValidStates = function(stackArray) {
 
   var result = [];
   for (var i = 0; i <= 2; i++) {
@@ -87,12 +87,5 @@ function nextValidStates(stackArray) {
   }
   return result;
 }
-
-crane.prototype = {
-  moveContainer,
-  getActions,
-  getCostForAction,
-  nextValidStates
-};
 
 module.exports = crane;

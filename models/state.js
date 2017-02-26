@@ -1,6 +1,6 @@
 function state() {}
 
-function parse(string) {
+state.prototype.parse = function(string) {
 
   var stacks = [];
   var arr = string.replace(/[( )]/g, '').split(';');
@@ -12,7 +12,7 @@ function parse(string) {
   return stacks;
 }
 
-function compare(stackA, stackB) {
+state.prototype.compare = function (stackA, stackB) {
 
   var result = true;
 
@@ -26,11 +26,6 @@ function compare(stackA, stackB) {
     }
   }
   return result;
-}
-
-state.prototype = {
-  parse,
-  compare
 }
 
 module.exports = state;
