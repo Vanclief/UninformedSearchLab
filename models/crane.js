@@ -30,6 +30,26 @@ function isMovementValid(stackA, stackB) {
     stackB.length < maxHeight);
 }
 
+function getCostForAction(stackA, stackB) {
+
+  console.log('StackA:', stackA);
+  console.log('StackB:', stackB);
+
+  let arr = [];
+
+  for (let i = 0; i <= 2; i++) {
+    arr.push(stackA[i].length + stackB[i].length);
+  }
+
+  let max = arr.indexOf(Math.max.apply(null, arr));
+  arr[max] = -1;
+
+  let second = arr.indexOf(Math.max.apply(null, arr));
+
+  console.log('(' + second + ', ' + max + ')');
+
+}
+
 function nextValidStates(stackArray) {
 
   let result = [];
@@ -52,6 +72,7 @@ function nextValidStates(stackArray) {
 
 crane.prototype = {
   moveContainer,
+  getCostForAction,
   nextValidStates
 };
 

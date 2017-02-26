@@ -50,7 +50,10 @@ function main(maxHeight, initialState, goalState) {
   console.log('Goal State:', goal);
 
   // console.log('Next Valid States', crane.nextValidStates(init));
-  console.log('found: ' + depthFirstSearch(init, goal));
+
+  if (!depthFirstSearch(init, goal)) {
+    console.log('No solution found');
+  }
 
 }
 
@@ -62,24 +65,28 @@ function depthFirstSearch(node, goal) {
 
 
   visited.push(node);
-  console.log('--Visited Nodes--');
-  console.log(visited);
+  // console.log('--Visited Nodes--');
+  // console.log(visited);
 
   if (state.compare(node, goal)) {
-    console.log('--Goal Found--');
-    console.log(goal);
+    // console.log('--Goal Found--');
+    // console.log(goal);
     return true;
   }
 
   let i, j, child, found;
   let children = crane.nextValidStates(node);
-  console.log('--Posible Actions--');
-  console.log(children);
+  // console.log('--Posible Actions--');
+  // console.log(children);
 
   for (i = 0; i < children.length; i++) {
     child = children[i];
+    console.log('--Searching with Child--');
+    console.log(child);
+
 
     if (!visitedContains(child)) {
+      crane.getCostForAction(node, child);
       found = depthFirstSearch(child, goal);
       if (found) {
         return found;
@@ -94,10 +101,10 @@ function visitedContains(stack) {
   result = false;
 
   for (j = 0; j < visited.length; j++) {
-    console.log('--VisitedContains--');
-    console.log('Checking:', stack);
-    console.log('Against', visited[j]);
-    console.log('Result:', state.compare(visited[j], stack));
+    // console.log('--VisitedContains--');
+    // console.log('Checking:', stack);
+    // console.log('Against', visited[j]);
+    // console.log('Result:', state.compare(visited[j], stack));
 
     if (state.compare(visited[j], stack)) {
       result = true;
