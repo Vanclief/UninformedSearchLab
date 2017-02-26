@@ -1,6 +1,7 @@
 var readline = require('readline');
 const Stack = require('./lib/stack');
 const Queue = require('./lib/queue');
+const Heap = require('./lib/binaryHeap');
 const Crane = require('./models/crane');
 const State = require('./models/state');
 
@@ -56,17 +57,24 @@ function main(maxHeight, initialState, goalState) {
 
   // console.log('Next Valid States', crane.nextValidStates(init));
 
-  if (!breathFirstSearch(init, goal)) {
-    console.log('No solution found');
-  } else {
-    console.log(cost);
-    printMovements();
-  }
+  // if (!breathFirstSearch(init, goal)) {
+  // console.log('No solution found');
+  // } else {
+  // console.log(cost);
+  // printMovements();
+  // }
+  astar(init, goal);
+  //
 
 }
 
 function printMovements() {
   console.log(movements.join('; '));
+}
+
+
+function astar(start, goal) {
+
 }
 
 function depthFirstSearch(node, goal) {
@@ -105,7 +113,6 @@ function depthFirstSearch(node, goal) {
   }
 
 }
-
 
 function breathFirstSearch(node, goal) {
 

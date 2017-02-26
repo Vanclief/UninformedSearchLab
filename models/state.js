@@ -28,6 +28,19 @@ state.prototype.compare = function (stackA, stackB) {
   return result;
 }
 
+state.prototype.getNumberMisplacedStacks = function (stacks, goal) {
+
+  var result = 0;
+
+  for (var i = 0; i <= 2; i++) {
+    if(this.compare(stacks[i], goal[i])) {
+      result ++;
+    }
+  }
+
+  return result;
+}
+
 if (!Array.prototype.includes) {
   Object.defineProperty(Array.prototype, 'includes', {
     value: function(searchElement, fromIndex) {
