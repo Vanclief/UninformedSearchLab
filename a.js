@@ -4,7 +4,7 @@ const Crane = require('./models/crane');
 const State = require('./models/state');
 
 // Create interface for STDIO
-let rl = readline.createInterface({
+var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   terminal: false
