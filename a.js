@@ -1,4 +1,4 @@
-let readline = require('readline');
+var readline = require('readline');
 const Stack = require('./lib/stack');
 const Crane = require('./models/crane');
 const State = require('./models/state');
