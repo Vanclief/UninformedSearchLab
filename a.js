@@ -10,12 +10,15 @@ let rl = readline.createInterface({
   terminal: false
 });
 
-// Input Variables
 let maxHeight, initialState, goalState;
 let inputCount = 1; // Counter for input
+
 let crane;
-let visited = [];
 let state = new State();
+
+let visited = [];
+let movements = [];
+let cost = 0;
 
 rl.on('line', function(line) {
 
@@ -45,26 +48,34 @@ function main(maxHeight, initialState, goalState) {
   let goal = state.parse(goalState);
   crane = new Crane(maxHeight);
 
-  console.log('Max Height:', maxHeight);
-  console.log('Initial State:', init);
-  console.log('Goal State:', goal);
+  // console.log('Max Height:', maxHeight);
+  // console.log('Initial State:', init);
+  // console.log('Goal State:', goal);
 
   // console.log('Next Valid States', crane.nextValidStates(init));
 
   if (!depthFirstSearch(init, goal)) {
     console.log('No solution found');
+  } else {
+    console.log(cost);
+    printMovements();
   }
 
+}
+
+function printMovements() {
+  console.log(movements.join('; '));
 }
 
 
 function depthFirstSearch(node, goal) {
 
-  console.log('--Searching with Node--');
-  console.log(node);
+  // console.log('--Searching with Node--');
+  // console.log(node);
 
 
   visited.push(node);
+
   // console.log('--Visited Nodes--');
   // console.log(visited);
 
@@ -81,12 +92,10 @@ function depthFirstSearch(node, goal) {
 
   for (i = 0; i < children.length; i++) {
     child = children[i];
-    console.log('--Searching with Child--');
-    console.log(child);
-
 
     if (!visitedContains(child)) {
-      crane.getCostForAction(node, child);
+      cost += crane.getCostForAction(node, child);
+      movements.push(crane.getActions(node, child));
       found = depthFirstSearch(child, goal);
       if (found) {
         return found;
