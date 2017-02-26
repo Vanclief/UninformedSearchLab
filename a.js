@@ -14,6 +14,7 @@ let rl = readline.createInterface({
 let maxHeight, initialState, goalState;
 let inputCount = 1; // Counter for input
 let crane;
+let visited = [];
 let state = new State();
 
 rl.on('line', function(line) {
@@ -54,20 +55,54 @@ function main(maxHeight, initialState, goalState) {
 }
 
 
-function depthFirstSearch(root, goal) {
+function depthFirstSearch(node, goal) {
 
-  if (state.compare(root, goal)) {
-    return goal;
+  console.log('--Searching with Node--');
+  console.log(node);
+
+
+  visited.push(node);
+  console.log('--Visited Nodes--');
+  console.log(visited);
+
+  if (state.compare(node, goal)) {
+    console.log('--Goal Found--');
+    console.log(goal);
+    return true;
   }
-  let i, child, found;
-  let children = crane.nextValidStates(root);
 
-  for (i = 0; i < children.length; i += 1) {
+  let i, j, child, found;
+  let children = crane.nextValidStates(node);
+  console.log('--Posible Actions--');
+  console.log(children);
+
+  for (i = 0; i < children.length; i++) {
     child = children[i];
-    found = depthFirstSearch(child, goal);
-    if (found) {
-      return found;
+
+    if (!visitedContains(child)) {
+      found = depthFirstSearch(child, goal);
+      if (found) {
+        return found;
+      }
     }
   }
 
+}
+
+function visitedContains(stack) {
+
+  result = false;
+
+  for (j = 0; j < visited.length; j++) {
+    console.log('--VisitedContains--');
+    console.log('Checking:', stack);
+    console.log('Against', visited[j]);
+    console.log('Result:', state.compare(visited[j], stack));
+
+    if (state.compare(visited[j], stack)) {
+      result = true;
+    }
+  }
+
+  return result;
 }
