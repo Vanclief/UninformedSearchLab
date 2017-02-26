@@ -10,15 +10,15 @@ var rl = readline.createInterface({
   terminal: false
 });
 
-let maxHeight, initialState, goalState;
-let inputCount = 1; // Counter for input
+var maxHeight, initialState, goalState;
+var inputCount = 1; // Counter for input
 
-let crane;
-let state = new State();
+var crane;
+var state = new State();
 
-let visited = [];
-let movements = [];
-let cost = 0;
+var visited = [];
+var movements = [];
+var cost = 0;
 
 rl.on('line', function(line) {
 
