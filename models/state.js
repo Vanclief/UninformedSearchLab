@@ -65,7 +65,7 @@ state.prototype.compareArray = function(stackA, stackB) {
   return false
 }
 
-state.prototype.getNumberMisplacedStacks = function(stacks, goal) {
+state.prototype.getNumberMisplacedStacks = function(stacks, goal, currentCost) {
 
   var result = 0;
 
@@ -75,7 +75,7 @@ state.prototype.getNumberMisplacedStacks = function(stacks, goal) {
     }
   }
 
-  return result;
+  return result + currentCost;
 }
 
 if (!Array.prototype.includes) {

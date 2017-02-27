@@ -90,11 +90,17 @@ function printMovements() {
   console.log(movements.join('; '));
 }
 
+function heuristic(node, goal, currentCost) {
+  return state.getNumberMisplacedStacks(node, goal, currentCost);
+}
+
 
 function astar(node, goal) {
 
-  var heap = new BinaryHeap(function(x) {
-    return state.getNumberMisplacedStacks(x, goal);
+  var currentCost = 0;
+
+  var heap = new BinaryHeap(function(node) {
+    return heuristic(node, goal, currentCost);
   });
 
   heap.push(node);
@@ -102,6 +108,7 @@ function astar(node, goal) {
   while (heap.size() > 0) {
 
     node = heap.pop();
+    console.log(node, heuristic(node, goal, currentCost));
 
     if (state.compare(node, goal)) {
       return true;
@@ -115,8 +122,8 @@ function astar(node, goal) {
       child = children[i];
       if (!visitedContains(child)) {
         cost += crane.getCostForAction(node, child);
+        var currentCost = cost;
         movements.push(crane.getActions(node, child));
-        // console.log(child, state.getNumberMisplacedStacks(child, goal));
         heap.push(child);
       }
     }
