@@ -55,14 +55,14 @@ function main(maxHeight, initialState, goalState) {
   console.log('Initial State:', init);
   console.log('Goal State:', goal);
 
-  testHeap(init, goal);
+  // testHeap(init, goal);
 
-  // if (!astar(init, goal)) {
-    // console.log('No solution found');
-  // } else {
-    // console.log(cost);
-    // printMovements();
-  // }
+  if (!astar(init, goal)) {
+    console.log('No solution found');
+  } else {
+    console.log(cost);
+    printMovements();
+  }
   //
   //
  }
@@ -103,8 +103,8 @@ function astar(node, goal) {
 
     node = heap.pop();
 
-    // console.log('--Searching with Node--');
-    // console.log(node);
+    console.log('--Searching with Node--');
+    console.log(node);
 
     if (state.compare(node, goal)) {
       // console.log('--Goal Found--');
@@ -113,12 +113,12 @@ function astar(node, goal) {
     }
 
     visited.push(node);
-    // console.log('--Visited Nodes--');
-    // console.log(visited);
+    console.log('--Visited Nodes--');
+    console.log(visited);
 
     var children = crane.nextValidStates(node);
-    // console.log('--Posible Actions--');
-    // console.log(children);
+    console.log('--Posible Actions--');
+    console.log(children);
 
     for (var i = 0; i < children.length; i++) {
       child = children[i];

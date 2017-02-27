@@ -14,11 +14,11 @@ state.prototype.parse = function(string) {
 
 state.prototype.compare = function(stackArrayA, stackArrayB) {
 
-  var result = false;
+  var result = true;
 
-  for (var i = 0; i <= stackArrayA.length; i++) {
-    if (this.compareArray(stackArrayA[i], stackArrayB[i])) {
-      result = true;
+  for (var i = 0; i < stackArrayA.length; i++) {
+    if (!(this.compareArray(stackArrayA[i], stackArrayB[i]))) {
+      result = false;
     }
   }
 
@@ -30,6 +30,7 @@ state.prototype.compareArray = function(stackA, stackB) {
 
   var result = true;
 
+
   if (typeof stackA == 'undefined' &&
     typeof stackB == 'undefined') {
     console.log('Compare R1', stackA, stackB, true);
@@ -37,13 +38,13 @@ state.prototype.compareArray = function(stackA, stackB) {
   } else if (typeof stackA != 'undefined' &&
     typeof stackB != 'undefined') {
 
-    if (stackB[0].includes('X')) {
-      console.log('Compare R3', stackA, stackB, true);
+    if (stackB.includes('X')) {
+      // console.log('Compare R3', stackA, stackB, true);
       return true;
     }
 
     if (stackA.length != stackB.length){
-      console.log('Compare R6', stackA, stackB, false);
+      // console.log('Compare R6', stackA, stackB, false);
       return false;
     }
 
@@ -52,15 +53,15 @@ state.prototype.compareArray = function(stackA, stackB) {
         result = false;
     }
 
-    console.log('Compare R2', stackA, stackB, result);
+    // console.log('Compare R2', stackA, stackB, result);
     return result;
 
   } else {
-    console.log('Compare R4', stackA, stackB, false);
+    // console.log('Compare R4', stackA, stackB, false);
     return false;
   }
 
-  console.log('Compare R5', stackA, stackB, false);
+  // console.log('Compare R5', stackA, stackB, false);
   return false
 }
 
