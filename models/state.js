@@ -14,31 +14,43 @@ state.prototype.parse = function(string) {
 
 state.prototype.compare = function(stackA, stackB) {
 
-    // Returns true if they are equal/valid
-  if (typeof stackA[0] != 'undefined' &&
-    typeof stackB[0] != 'undefined') {
+  var result = false;
 
-    if (stackB[0].includes('X')) {
-      // console.log('Comparing r1', stackA, stackB, true);
-      return true
+  for (var i = 0; i <= 2; i++) {
+    if (this.compareArray(stacks[i], goal[i])) {
+      result = true;
+    }
+  }
+
+  return result;
+
+}
+
+state.prototype.compareArray = function(stackA, stackB) {
+
+  var result = false;
+
+  if (typeof stackA == 'undefined' &&
+    typeof stackB == 'undefined') {
+    return true;
+  } else if (typeof stackA != 'undefined' &&
+    typeof stackB != 'undefined') {
+
+    for (var i = 0; i <= stackA.length; i++) {
+      if (JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]))
+        result = true;
     }
 
-    if (stackA.length != stackB.length) {
-      // console.log('Comparing r2', stackA, stackB, false);
+    return result;
+
+  } else {
+    if (stackB[0].includes('X')) {
+      return true;
+    } else {
       return false;
     }
-
-    var result = false;
-
-    for (var i = 0; i <= 2; i++) {
-      result = JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]);
-    }
-    // console.log('Comparing r3', stackA, stackB, result);
-    return result;
-  } else {
-    // console.log('Comparing r4', stackA, stackB, false);
-    return false
   }
+  return false
 }
 
 state.prototype.getNumberMisplacedStacks = function(stacks, goal) {
@@ -46,7 +58,7 @@ state.prototype.getNumberMisplacedStacks = function(stacks, goal) {
   var result = 0;
 
   for (var i = 0; i <= 2; i++) {
-    if (this.compare(stacks[i], goal[i])) {
+    if (this.compareArray(stacks[i], goal[i])) {
       result++;
     }
   }

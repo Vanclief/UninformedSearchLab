@@ -55,19 +55,19 @@ function main(maxHeight, initialState, goalState) {
   console.log('Initial State:', init);
   console.log('Goal State:', goal);
 
-  // testHeap(init);
+  testHeap(init, goal);
 
-  if (!astar(init, goal)) {
-    console.log('No solution found');
-  } else {
-    console.log(cost);
-    printMovements();
-  }
+  // if (!astar(init, goal)) {
+    // console.log('No solution found');
+  // } else {
+    // console.log(cost);
+    // printMovements();
+  // }
   //
   //
  }
 
-function testHeap(init) {
+function testHeap(init, goal) {
  var nextValidStates = crane.nextValidStates(init);
   var heap = new BinaryHeap(function(x) {
     return state.getNumberMisplacedStacks(x, goal);
@@ -99,29 +99,26 @@ function astar(node, goal) {
 
   heap.push(node);
 
-  console.log('Heap size', heap.size());
-
   while (heap.size() > 0) {
 
     node = heap.pop();
-    console.log('Heap size after pop', heap.size());
 
-    console.log('--Searching with Node--');
-    console.log(node);
+    // console.log('--Searching with Node--');
+    // console.log(node);
 
     if (state.compare(node, goal)) {
-      console.log('--Goal Found--');
-      console.log(goal);
+      // console.log('--Goal Found--');
+      // console.log(goal);
       return true;
     }
 
     visited.push(node);
-    console.log('--Visited Nodes--');
-    console.log(visited);
+    // console.log('--Visited Nodes--');
+    // console.log(visited);
 
     var children = crane.nextValidStates(node);
-    console.log('--Posible Actions--');
-    console.log(children);
+    // console.log('--Posible Actions--');
+    // console.log(children);
 
     for (var i = 0; i < children.length; i++) {
       child = children[i];
@@ -131,7 +128,6 @@ function astar(node, goal) {
         heap.push(child);
       }
     }
-
   }
 }
 
