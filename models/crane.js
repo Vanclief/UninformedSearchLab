@@ -71,8 +71,8 @@ crane.prototype.getCostForAction =  function(stackA, stackB) {
 crane.prototype.nextValidStates = function(stackArray) {
 
   var result = [];
-  for (var i = 0; i <= 2; i++) {
-    for (var j = 0; j <= 2; j++) {
+  for (var i = 0; i < stackArray.length; i++) {
+    for (var j = 0; j < stackArray.length; j++) {
       if (!(i == j)) {
         if (this.isMovementValid(stackArray[i], stackArray[j])) {
           // console.log(i + ' to ' + j);

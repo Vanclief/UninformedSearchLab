@@ -65,10 +65,10 @@ function main(maxHeight, initialState, goalState) {
   }
   //
   //
- }
+}
 
 function testHeap(init, goal) {
- var nextValidStates = crane.nextValidStates(init);
+  var nextValidStates = crane.nextValidStates(init);
   var heap = new BinaryHeap(function(x) {
     return state.getNumberMisplacedStacks(x, goal);
   });
@@ -103,105 +103,22 @@ function astar(node, goal) {
 
     node = heap.pop();
 
-    console.log('--Searching with Node--');
-    console.log(node);
-
     if (state.compare(node, goal)) {
-      // console.log('--Goal Found--');
-      // console.log(goal);
       return true;
     }
 
     visited.push(node);
-    console.log('--Visited Nodes--');
-    console.log(visited);
 
     var children = crane.nextValidStates(node);
-    console.log('--Posible Actions--');
-    console.log(children);
 
     for (var i = 0; i < children.length; i++) {
       child = children[i];
       if (!visitedContains(child)) {
         cost += crane.getCostForAction(node, child);
-        movements.push(crane.getActions(node, child));
+        console.log(child, state.getNumberMisplacedStacks(child, goal));
         heap.push(child);
       }
     }
-  }
-}
-
-function depthFirstSearch(node, goal) {
-
-  // console.log('--Searching with Node--');
-  // console.log(node);
-
-
-  visited.push(node);
-
-  // console.log('--Visited Nodes--');
-  // console.log(visited);
-
-  if (state.compare(node, goal)) {
-    // console.log('--Goal Found--');
-    // console.log(goal);
-    return true;
-  }
-
-  var i, j, child, found;
-  var children = crane.nextValidStates(node);
-  // console.log('--Posible Actions--');
-  // console.log(children);
-
-  for (i = 0; i < children.length; i++) {
-    child = children[i];
-
-    if (!visitedContains(child)) {
-      cost += crane.getCostForAction(node, child);
-      movements.push(crane.getActions(node, child));
-      found = depthFirstSearch(child, goal);
-      if (found) {
-        return found;
-      }
-    }
-  }
-
-}
-
-function breathFirstSearch(node, goal) {
-
-  queue.push(node);
-
-  while (queue.length > 0) {
-
-    node = queue.pop();
-
-    console.log('--Searching with Node--');
-    console.log(node);
-
-    if (state.compare(node, goal)) {
-      console.log('--Goal Found--');
-      console.log(goal);
-      return true;
-    }
-
-    visited.push(node);
-    console.log('--Visited Nodes--');
-    console.log(visited);
-
-    var children = crane.nextValidStates(node);
-    console.log('--Posible Actions--');
-    console.log(children);
-
-    for (var i = 0; i < children.length; i++) {
-      child = children[i];
-      if (!visitedContains(child)) {
-        cost += crane.getCostForAction(node, child);
-        movements.push(crane.getActions(node, child));
-        queue.push(child);
-      }
-    }
-
   }
 }
 

@@ -51,7 +51,7 @@ function main(maxHeight, initialState, goalState) {
   var goal = state.parse(goalState);
   crane = new Crane(maxHeight);
 
-  if (!depthFirstSearch(init, goal)) {
+  if (!breadthFirstSearch(init, goal)) {
     console.log('No solution found');
   } else {
     console.log(cost);
@@ -63,30 +63,31 @@ function printMovements() {
   console.log(movements.join('; '));
 }
 
-function depthFirstSearch(node, goal) {
+function breadthFirstSearch(node, goal) {
 
-  visited.push(node);
+  queue.push(node);
 
-  if (state.compare(node, goal)) {
-    return true;
-  }
+  while (queue.length > 0) {
 
-  var i, j, child, found;
-  var children = crane.nextValidStates(node);
+    node = queue.pop();
 
-  for (i = 0; i < children.length; i++) {
-    child = children[i];
+    if (state.compare(node, goal)) {
+      return true;
+    }
 
-    if (!visitedContains(child)) {
-      cost += crane.getCostForAction(node, child);
-      movements.push(crane.getActions(node, child));
-      found = depthFirstSearch(child, goal);
-      if (found) {
-        return found;
+    visited.push(node);
+
+    var children = crane.nextValidStates(node);
+    for (var i = 0; i < children.length; i++) {
+      child = children[i];
+      if (!visitedContains(child)) {
+        cost += crane.getCostForAction(node, child);
+        movements.push(crane.getActions(node, child));
+        queue.push(child);
       }
     }
-  }
 
+  }
 }
 
 function visitedContains(stack) {

@@ -5,9 +5,9 @@ state.prototype.parse = function(string) {
   var stacks = [];
   var arr = string.replace(/[( )]/g, '').split(';');
 
-  stacks.push(arr[0].split(',').filter(Boolean));
-  stacks.push(arr[1].split(',').filter(Boolean));
-  stacks.push(arr[2].split(',').filter(Boolean));
+  for (var i = 0; i < arr.length; i++) {
+    stacks.push(arr[i].split(',').filter(Boolean));
+  }
 
   return stacks;
 }
@@ -43,7 +43,7 @@ state.prototype.compareArray = function(stackA, stackB) {
       return true;
     }
 
-    if (stackA.length != stackB.length){
+    if (stackA.length != stackB.length) {
       // console.log('Compare R6', stackA, stackB, false);
       return false;
     }
@@ -69,7 +69,7 @@ state.prototype.getNumberMisplacedStacks = function(stacks, goal) {
 
   var result = 0;
 
-  for (var i = 0; i <= 2; i++) {
+  for (var i = 0; i < stacks.length; i++) {
     if (this.compareArray(stacks[i], goal[i])) {
       result++;
     }
