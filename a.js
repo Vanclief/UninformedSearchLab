@@ -4,6 +4,7 @@ const Queue = require('./lib/queue');
 const BinaryHeap = require('./lib/binaryHeap');
 const Crane = require('./models/crane');
 const State = require('./models/state');
+const Node = require('./models/node');
 
 // Create interface for STDIO
 var rl = readline.createInterface({
@@ -51,10 +52,6 @@ function main(maxHeight, initialState, goalState) {
   var goal = state.parse(goalState);
   crane = new Crane(maxHeight);
 
-  console.log('Max Height:', maxHeight);
-  console.log('Initial State:', init);
-  console.log('Goal State:', goal);
-
   // testHeap(init, goal);
 
   if (!astar(init, goal)) {
@@ -95,12 +92,15 @@ function heuristic(node, goal, currentCost) {
 }
 
 
-function astar(node, goal) {
+function astar(init, goal) {
 
   var currentCost = 0;
 
+  var node = new Node(init, null)
+
+
   var heap = new BinaryHeap(function(node) {
-    return heuristic(node, goal, currentCost);
+    return heuristic(node.state, goal, currentCost);
   });
 
   heap.push(node);
@@ -108,23 +108,26 @@ function astar(node, goal) {
   while (heap.size() > 0) {
 
     node = heap.pop();
-    console.log(node, heuristic(node, goal, currentCost));
 
-    if (state.compare(node, goal)) {
+    if (state.compare(node.state, goal)) {
+      while (node.parent) {
+        movements.push(node.action);
+        cost += node.cost;
+        node = node.parent;
+      }
       return true;
     }
 
-    visited.push(node);
+    visited.push(node.state);
 
-    var children = crane.nextValidStates(node);
+    var children = crane.nextValidStates(node.state);
 
     for (var i = 0; i < children.length; i++) {
       child = children[i];
       if (!visitedContains(child)) {
-        cost += crane.getCostForAction(node, child);
-        var currentCost = cost;
-        movements.push(crane.getActions(node, child));
-        heap.push(child);
+        var currentCost = node.cost;
+        var newNode = new Node(child, node);
+        heap.push(newNode);
       }
     }
   }
