@@ -12,12 +12,12 @@ state.prototype.parse = function(string) {
   return stacks;
 }
 
-state.prototype.compare = function(stackA, stackB) {
+state.prototype.compare = function(stackArrayA, stackArrayB) {
 
   var result = false;
 
-  for (var i = 0; i <= 2; i++) {
-    if (this.compareArray(stacks[i], goal[i])) {
+  for (var i = 0; i <= stackArrayA.length; i++) {
+    if (this.compareArray(stackArrayA[i], stackArrayB[i])) {
       result = true;
     }
   }
@@ -28,28 +28,39 @@ state.prototype.compare = function(stackA, stackB) {
 
 state.prototype.compareArray = function(stackA, stackB) {
 
-  var result = false;
+  var result = true;
 
   if (typeof stackA == 'undefined' &&
     typeof stackB == 'undefined') {
+    console.log('Compare R1', stackA, stackB, true);
     return true;
   } else if (typeof stackA != 'undefined' &&
     typeof stackB != 'undefined') {
 
-    for (var i = 0; i <= stackA.length; i++) {
-      if (JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]))
-        result = true;
+    if (stackB[0].includes('X')) {
+      console.log('Compare R3', stackA, stackB, true);
+      return true;
     }
 
+    if (stackA.length != stackB.length){
+      console.log('Compare R6', stackA, stackB, false);
+      return false;
+    }
+
+    for (var i = 0; i <= stackA.length; i++) {
+      if (!JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]))
+        result = false;
+    }
+
+    console.log('Compare R2', stackA, stackB, result);
     return result;
 
   } else {
-    if (stackB[0].includes('X')) {
-      return true;
-    } else {
-      return false;
-    }
+    console.log('Compare R4', stackA, stackB, false);
+    return false;
   }
+
+  console.log('Compare R5', stackA, stackB, false);
   return false
 }
 
