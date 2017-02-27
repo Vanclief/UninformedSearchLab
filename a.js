@@ -1,7 +1,7 @@
 var readline = require('readline');
 const Stack = require('./lib/stack');
 const Queue = require('./lib/queue');
-const Heap = require('./lib/binaryHeap');
+const BinaryHeap = require('./lib/binaryHeap');
 const Crane = require('./models/crane');
 const State = require('./models/state');
 
@@ -55,26 +55,64 @@ function main(maxHeight, initialState, goalState) {
   console.log('Initial State:', init);
   console.log('Goal State:', goal);
 
-  // console.log('Next Valid States', crane.nextValidStates(init));
-
-  // if (!breathFirstSearch(init, goal)) {
-  // console.log('No solution found');
-  // } else {
-  // console.log(cost);
-  // printMovements();
-  // }
-  astar(init, goal);
+  if (!astar(init, goal)) {
+    console.log('No solution found');
+  } else {
+    console.log(cost);
+    printMovements();
+  }
   //
-
+  //
 }
+
 
 function printMovements() {
   console.log(movements.join('; '));
 }
 
 
-function astar(start, goal) {
+function astar(node, goal) {
 
+  var heap = new BinaryHeap(function(x) {
+    return state.getNumberMisplacedStacks(x, goal);
+  });
+
+  heap.push(node);
+
+  console.log('Heap size', heap.size());
+
+  while (heap.size() > 0) {
+
+    node = heap.pop();
+    console.log('Heap size after pop', heap.size());
+
+    console.log('--Searching with Node--');
+    console.log(node);
+
+    if (state.compare(node, goal)) {
+      console.log('--Goal Found--');
+      console.log(goal);
+      return true;
+    }
+
+    visited.push(node);
+    console.log('--Visited Nodes--');
+    console.log(visited);
+
+    var children = crane.nextValidStates(node);
+    console.log('--Posible Actions--');
+    console.log(children);
+
+    for (var i = 0; i < children.length; i++) {
+      child = children[i];
+      if (!visitedContains(child)) {
+        cost += crane.getCostForAction(node, child);
+        movements.push(crane.getActions(node, child));
+        heap.push(child);
+      }
+    }
+
+  }
 }
 
 function depthFirstSearch(node, goal) {

@@ -12,29 +12,40 @@ state.prototype.parse = function(string) {
   return stacks;
 }
 
-state.prototype.compare = function (stackA, stackB) {
+state.prototype.compare = function(stackA, stackB) {
 
-  var result = true;
+  // Returns true if they are equal/valid
+  if (stackB[0].includes('X')) {
+    // console.log('Comparing r1', stackA, stackB, true);
+    return true
+  }
+
+  if (stackA.length != stackB.length) {
+    // console.log('Comparing r2', stackA, stackB, false);
+    return false;
+  }
+
+  var result = false;
 
   for (var i = 0; i <= 2; i++) {
 
     if (typeof stackA[i] != 'undefined' &&
-        typeof stackB[i] != 'undefined' &&
-        !stackB[i].includes('X'))
-    {
-      result = JSON.stringify(stackA[0]) == JSON.stringify(stackB[0]);
+      typeof stackB[i] != 'undefined' &&
+      !stackB[i].includes('X')) {
+      result = JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]);
     }
   }
+  // console.log('Comparing r3', stackA, stackB, result);
   return result;
 }
 
-state.prototype.getNumberMisplacedStacks = function (stacks, goal) {
+state.prototype.getNumberMisplacedStacks = function(stacks, goal) {
 
   var result = 0;
 
   for (var i = 0; i <= 2; i++) {
-    if(this.compare(stacks[i], goal[i])) {
-      result ++;
+    if (this.compare(stacks[i], goal[i])) {
+      result++;
     }
   }
 
