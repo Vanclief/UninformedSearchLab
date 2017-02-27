@@ -115,7 +115,8 @@ function astar(node, goal) {
       child = children[i];
       if (!visitedContains(child)) {
         cost += crane.getCostForAction(node, child);
-        console.log(child, state.getNumberMisplacedStacks(child, goal));
+        movements.push(crane.getActions(node, child));
+        // console.log(child, state.getNumberMisplacedStacks(child, goal));
         heap.push(child);
       }
     }
