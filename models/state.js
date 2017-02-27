@@ -14,29 +14,31 @@ state.prototype.parse = function(string) {
 
 state.prototype.compare = function(stackA, stackB) {
 
-  // Returns true if they are equal/valid
-  if (stackB[0].includes('X')) {
-    // console.log('Comparing r1', stackA, stackB, true);
-    return true
-  }
+    // Returns true if they are equal/valid
+  if (typeof stackA[0] != 'undefined' &&
+    typeof stackB[0] != 'undefined') {
 
-  if (stackA.length != stackB.length) {
-    // console.log('Comparing r2', stackA, stackB, false);
-    return false;
-  }
+    if (stackB[0].includes('X')) {
+      // console.log('Comparing r1', stackA, stackB, true);
+      return true
+    }
 
-  var result = false;
+    if (stackA.length != stackB.length) {
+      // console.log('Comparing r2', stackA, stackB, false);
+      return false;
+    }
 
-  for (var i = 0; i <= 2; i++) {
+    var result = false;
 
-    if (typeof stackA[i] != 'undefined' &&
-      typeof stackB[i] != 'undefined' &&
-      !stackB[i].includes('X')) {
+    for (var i = 0; i <= 2; i++) {
       result = JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]);
     }
+    // console.log('Comparing r3', stackA, stackB, result);
+    return result;
+  } else {
+    // console.log('Comparing r4', stackA, stackB, false);
+    return false
   }
-  // console.log('Comparing r3', stackA, stackB, result);
-  return result;
 }
 
 state.prototype.getNumberMisplacedStacks = function(stacks, goal) {

@@ -55,6 +55,8 @@ function main(maxHeight, initialState, goalState) {
   console.log('Initial State:', init);
   console.log('Goal State:', goal);
 
+  // testHeap(init);
+
   if (!astar(init, goal)) {
     console.log('No solution found');
   } else {
@@ -63,6 +65,24 @@ function main(maxHeight, initialState, goalState) {
   }
   //
   //
+ }
+
+function testHeap(init) {
+ var nextValidStates = crane.nextValidStates(init);
+  var heap = new BinaryHeap(function(x) {
+    return state.getNumberMisplacedStacks(x, goal);
+  });
+
+  for (var k = 0; k < nextValidStates.length; k++) {
+    heap.push(nextValidStates[k]);
+  }
+
+  console.log('Pop States --');
+
+  while (heap.size() > 0) {
+    var x = heap.pop();
+    console.log(x, state.getNumberMisplacedStacks(x, goal));
+  }
 }
 
 
