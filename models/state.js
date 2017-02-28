@@ -83,7 +83,7 @@ state.prototype.getNumberMisplacedBlocks = function(stacks, goal) {
   var result = 0;
 
   for (var i = 0; i < stacks.length; i++) {
-    if (stacks[i]) {
+    if (stacks[i] && !(goal[i]).includes('X')) {
       for (var j = 0; j < stacks[i].length; j++) {
         if (!(goal[i].includes(stacks[i][j])))
             result++;

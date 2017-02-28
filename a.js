@@ -53,6 +53,7 @@ function main(maxHeight, initialState, goalState) {
   crane = new Crane(maxHeight);
 
   // testHeap(init, goal);
+  console.log(state.getNumberMisplacedBlocks(init, goal));
 
   if (!astar(init, goal)) {
     console.log('No solution found');
