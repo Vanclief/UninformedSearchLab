@@ -104,17 +104,16 @@ function astar(init, goal) {
 
   var node = new Node(init, null)
 
-
   var heap = new BinaryHeap(function(node) {
-    return heuristic(node.state, goal, currentCost);
+    return heuristic(node.state, goal, currentCost) + node.cost;
   });
 
   heap.push(node);
 
   while (heap.size() > 0) {
 
-    // console.log('--Heap BEFORE Pop --');
-    // console.log(heap);
+    console.log('--Heap BEFORE Pop --');
+    console.log(heap);
     node = heap.pop();
     // console.log('--Heap After Pop --');
     // console.log(heap);
