@@ -34,12 +34,12 @@ crane.prototype.getActions = function(stackA, stackB) {
 
   var arr = [];
 
+  // TODO make this single function
   for (var i = 0; i <= 2; i++) {
     arr.push(stackA[i].length - stackB[i].length);
   }
 
   var max = arr.indexOf(Math.max.apply(null, arr));
-
   var second = arr.indexOf(Math.min.apply(null, arr));
 
   return('(' + second + ', ' + max + ')');
@@ -51,13 +51,13 @@ crane.prototype.getCostForAction =  function(stackA, stackB) {
  var arr = [];
  var result = 1;
 
+  // TODO make this single function 2/2
   for (var i = 0; i <= 2; i++) {
-    arr.push(stackA[i].length + stackB[i].length);
+    arr.push(stackA[i].length - stackB[i].length);
   }
 
   var max = arr.indexOf(Math.max.apply(null, arr));
-  arr[max] = -1;
-  var second = arr.indexOf(Math.max.apply(null, arr));
+  var second = arr.indexOf(Math.min.apply(null, arr));
 
   var stacksMoved = (Math.abs(max - second));
 

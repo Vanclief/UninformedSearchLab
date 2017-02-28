@@ -113,13 +113,15 @@ function astar(init, goal) {
   while (heap.size() > 0) {
 
     node = heap.pop();
-    node.print();
+    // console.log('--Heap After Pop --');
+    // console.log(heap);
+    // node.print();
 
     if (state.compare(node.state, goal)) {
+      cost = node.cost;
       while (node.parent) {
         // node.print();
         movements.push(node.action);
-        cost += node.cost;
         node = node.parent;
       }
       return true;
@@ -136,6 +138,8 @@ function astar(init, goal) {
         var currentCost = node.cost;
         var newNode = new Node(child, node);
         heap.push(newNode);
+        // console.log('--Heap after push --');
+        // console.log(heap);
       }
     }
   }
