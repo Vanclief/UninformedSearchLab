@@ -78,6 +78,24 @@ state.prototype.getNumberMisplacedStacks = function(stacks, goal, currentCost) {
   return result + currentCost;
 }
 
+state.prototype.getNumberMisplacedBlocks = function(stacks, goal) {
+
+  var result = 0;
+
+  for (var i = 0; i < stacks.length; i++) {
+    if (stacks[i]) {
+      for (var j = 0; j < stacks[i].length; j++) {
+        if (!(goal[i].includes(stacks[i][j])))
+            result++;
+      }
+    }
+  }
+
+  return result;
+
+
+}
+
 if (!Array.prototype.includes) {
   Object.defineProperty(Array.prototype, 'includes', {
     value: function(searchElement, fromIndex) {

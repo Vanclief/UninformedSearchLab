@@ -93,7 +93,8 @@ function printMovements() {
 }
 
 function heuristic(node, goal, currentCost) {
-  return state.getNumberMisplacedStacks(node, goal, currentCost);
+  // return state.getNumberMisplacedStacks(node, goal, currentCost);
+  return state.getNumberMisplacedBlocks(node, goal);
   // return 0;
 }
 
