@@ -33,7 +33,7 @@ state.prototype.compareArray = function(stackA, stackB) {
 
   if (typeof stackA == 'undefined' &&
     typeof stackB == 'undefined') {
-    console.log('Compare R1', stackA, stackB, true);
+    // console.log('Compare R1', stackA, stackB, true);
     return true;
   } else if (typeof stackA != 'undefined' &&
     typeof stackB != 'undefined') {
@@ -49,7 +49,7 @@ state.prototype.compareArray = function(stackA, stackB) {
     }
 
     for (var i = 0; i <= stackA.length; i++) {
-      if (!JSON.stringify(stackA[i]) == JSON.stringify(stackB[i]))
+      if (!(JSON.stringify(stackA[i]) == JSON.stringify(stackB[i])))
         result = false;
     }
 
