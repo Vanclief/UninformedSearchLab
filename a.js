@@ -113,6 +113,7 @@ function astar(init, goal) {
   while (heap.size() > 0) {
 
     node = heap.pop();
+    node.print();
 
     if (state.compare(node.state, goal)) {
       while (node.parent) {

@@ -5,10 +5,14 @@ var crane = new Crane();
 function Node(state, parent) {
   this.state = state;
   this.parent = parent;
-  (parent) ? this.cost = crane.getCostForAction(state, parent.state): this.cost = 0;
+  if (parent) {
+    this.cost = crane.getCostForAction(state, parent.state) +
+      parent.cost;
+  } else {
+    this.cost = 0;
+  }
   (parent) ? this.action = crane.getActions(state, parent.state): this.action = null;
 }
-
 
 Node.prototype.print = function() {
 
@@ -20,8 +24,5 @@ Node.prototype.print = function() {
   console.log('Action:', this.action);
 
 }
-
-
-
 
 module.exports = Node;
