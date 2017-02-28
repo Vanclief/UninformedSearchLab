@@ -32,7 +32,6 @@ crane.prototype.isMovementValid = function(stackA, stackB) {
 
 crane.prototype.getActions = function(stackA, stackB) {
 
-  // TODO make this single func
   var arr = [];
 
   for (var i = 0; i <= 2; i++) {
@@ -40,9 +39,8 @@ crane.prototype.getActions = function(stackA, stackB) {
   }
 
   var max = arr.indexOf(Math.max.apply(null, arr));
-  arr[max] = -1;
 
-  var second = arr.indexOf(Math.max.apply(null, arr));
+  var second = arr.indexOf(Math.min.apply(null, arr));
 
   return('(' + second + ', ' + max + ')');
 

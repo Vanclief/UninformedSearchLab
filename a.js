@@ -21,7 +21,7 @@ var state = new State();
 
 var visited = [];
 var queue = new Queue();
-var movements = [];
+var movements = new Stack();
 var cost = 0;
 
 rl.on('line', function(line) {
@@ -84,7 +84,12 @@ function testHeap(init, goal) {
 
 
 function printMovements() {
-  console.log(movements.join('; '));
+  var arr = [];
+
+  while (movements.length > 0) {
+    arr.push(movements.pop());
+  }
+  console.log(arr.join('; '));
 }
 
 function heuristic(node, goal, currentCost) {
@@ -111,6 +116,7 @@ function astar(init, goal) {
 
     if (state.compare(node.state, goal)) {
       while (node.parent) {
+        // node.print();
         movements.push(node.action);
         cost += node.cost;
         node = node.parent;
