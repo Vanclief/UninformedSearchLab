@@ -128,6 +128,7 @@ function astar(init, goal) {
     visited.push(node.state);
 
     var children = crane.nextValidStates(node.state);
+    // console.log('Posibilities:', children);
 
     for (var i = 0; i < children.length; i++) {
       child = children[i];

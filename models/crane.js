@@ -35,7 +35,7 @@ crane.prototype.getActions = function(stackA, stackB) {
   var arr = [];
 
   for (var i = 0; i <= 2; i++) {
-    arr.push(stackA[i].length + stackB[i].length);
+    arr.push(stackA[i].length - stackB[i].length);
   }
 
   var max = arr.indexOf(Math.max.apply(null, arr));
