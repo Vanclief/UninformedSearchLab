@@ -112,6 +112,8 @@ function astar(init, goal) {
 
   while (heap.size() > 0) {
 
+    // console.log('--Heap BEFORE Pop --');
+    // console.log(heap);
     node = heap.pop();
     // console.log('--Heap After Pop --');
     // console.log(heap);

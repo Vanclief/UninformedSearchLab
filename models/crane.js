@@ -32,34 +32,44 @@ crane.prototype.isMovementValid = function(stackA, stackB) {
 
 crane.prototype.getActions = function(stackA, stackB) {
 
-  var arr = [];
 
-  // TODO make this single function
-  for (var i = 0; i <= 2; i++) {
-    arr.push(stackA[i].length - stackB[i].length);
+  var max, min;
+  var result = 1;
+
+  // TODO make this single function 2/2
+  for (var i = 0; i < stackA.length; i++) {
+    if (stackA[i].length < stackB[i].length) {
+      min = i;
+    } else if (stackA[i].length > stackB[i].length) {
+      max = i;
+    }
   }
 
-  var max = arr.indexOf(Math.max.apply(null, arr));
-  var second = arr.indexOf(Math.min.apply(null, arr));
+  // var max = arr.indexOf(Math.max.apply(null, arr));
+  // var min = arr.indexOf(Math.min.apply(null, arr));
 
-  return('(' + second + ', ' + max + ')');
+  return ('(' + min + ', ' + max + ')');
 
 }
 
-crane.prototype.getCostForAction =  function(stackA, stackB) {
+crane.prototype.getCostForAction = function(stackA, stackB) {
 
- var arr = [];
- var result = 1;
+  var max, min;
+  var result = 1;
 
   // TODO make this single function 2/2
-  for (var i = 0; i <= 2; i++) {
-    arr.push(stackA[i].length - stackB[i].length);
+  for (var i = 0; i < stackA.length; i++) {
+    if (stackA[i].length < stackB[i].length) {
+      min = i;
+    } else if (stackA[i].length > stackB[i].length) {
+      max = i;
+    }
   }
 
-  var max = arr.indexOf(Math.max.apply(null, arr));
-  var second = arr.indexOf(Math.min.apply(null, arr));
+  // var max = arr.indexOf(Math.max.apply(null, arr));
+  // var min = arr.indexOf(Math.min.apply(null, arr));
 
-  var stacksMoved = (Math.abs(max - second));
+  var stacksMoved = (Math.abs(max - min));
 
   return (result + stacksMoved);
 

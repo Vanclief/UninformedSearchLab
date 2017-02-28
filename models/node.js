@@ -21,6 +21,8 @@ Node.prototype.print = function() {
     console.log('Parent:', this.parent.state);
   console.log('State:', this.state);
   console.log('Cost:', this.cost);
+  if (this.parent)
+    console.log('P. Cost:', this.parent.cost);
   console.log('Action:', this.action);
 
 }
