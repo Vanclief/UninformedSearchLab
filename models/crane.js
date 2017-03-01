@@ -22,12 +22,13 @@ function putDownContainer(stacks, stack, container) {
   return stacks;
 }
 
-crane.prototype.isMovementValid = function(stackA, stackB) {
-  // console.log(stackA + ' to ' + stackB);
-  // console.log(!(stackA.length === 0));
-  // console.log(stackB.length < maxHeight);
-  return (!(stackA.length === 0) &&
-    stackB.length < maxHeight);
+crane.prototype.isMovementValid = function(stackArray, a, b) {
+  // console.log(stackArray);
+  // console.log(a + ' to ' + b + ' | ' + maxHeight);
+  // console.log(!(stackArray[a].length === 0));
+  // console.log(stackArray[b].length < maxHeight);
+  return (!(stackArray[a].length === 0) &&
+    stackArray[b].length < maxHeight);
 }
 
 crane.prototype.getActions = function(stackA, stackB) {
@@ -82,7 +83,7 @@ crane.prototype.nextValidStates = function(stackArray) {
   for (var i = 0; i < stackArray.length; i++) {
     for (var j = 0; j < stackArray.length; j++) {
       if (!(i == j)) {
-        if (this.isMovementValid(stackArray[i], stackArray[j])) {
+        if (this.isMovementValid(stackArray, i, j)) {
           // console.log(i + ' to ' + j);
           // Need to make a copy of the array
           var stacks = stackArray.map(function(arr) {
