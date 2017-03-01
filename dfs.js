@@ -82,6 +82,7 @@ function depthFirstSearch(node, goal) {
       movements.push(crane.getActions(node, child));
       found = depthFirstSearch(child, goal);
       if (found) {
+        console.log(found);
         return found;
       }
     }

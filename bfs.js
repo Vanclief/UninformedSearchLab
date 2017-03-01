@@ -72,6 +72,7 @@ function breadthFirstSearch(node, goal) {
     node = queue.pop();
 
     if (state.compare(node, goal)) {
+      console.log(node);
       return true;
     }
 
