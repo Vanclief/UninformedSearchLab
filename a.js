@@ -22,6 +22,7 @@ var state = new State();
 var visited = [];
 var queue = new Queue();
 var movements = new Stack();
+var prevStates = new Stack();
 var cost = 0;
 
 rl.on('line', function(line) {
@@ -86,10 +87,14 @@ function testHeap(init, goal) {
 
 function printMovements() {
   var arr = [];
+  var arr2 = [];
 
   while (movements.length > 0) {
-    arr.push(movements.pop());
+    var n = movements.pop();
+    // n.print();
+    arr.push(n.action);
   }
+
   console.log(arr.join('; '));
 }
 
@@ -125,7 +130,7 @@ function astar(init, goal) {
       cost = node.cost;
       while (node.parent) {
         // node.print();
-        movements.push(node.action);
+        movements.push(node);
         node = node.parent;
       }
       return true;

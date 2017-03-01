@@ -6,12 +6,12 @@ function Node(state, parent) {
   this.state = state;
   this.parent = parent;
   if (parent) {
-    this.cost = crane.getCostForAction(state, parent.state) +
+    this.cost = crane.getCostForAction(parent.state, state) +
       parent.cost;
   } else {
     this.cost = 0;
   }
-  (parent) ? this.action = crane.getActions(state, parent.state): this.action = null;
+  (parent) ? this.action = crane.getActions(parent.state, state): this.action = null;
 }
 
 Node.prototype.print = function() {

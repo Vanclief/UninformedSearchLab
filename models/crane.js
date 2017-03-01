@@ -38,14 +38,17 @@ crane.prototype.getActions = function(stackA, stackB) {
   var result = 1;
 
   // TODO make this single function 2/2
+  // console.log(stackA);
+  // console.log(stackB);
   for (var i = 0; i < stackA.length; i++) {
-    if (stackA[i].length < stackB[i].length) {
+    if (stackA[i].length > stackB[i].length) {
       min = i;
-    } else if (stackA[i].length > stackB[i].length) {
+    } else if (stackA[i].length < stackB[i].length) {
       max = i;
     }
   }
 
+  // console.log(('(' + min + ', ' + max + ')'));
   // var max = arr.indexOf(Math.max.apply(null, arr));
   // var min = arr.indexOf(Math.min.apply(null, arr));
 
@@ -60,9 +63,9 @@ crane.prototype.getCostForAction = function(stackA, stackB) {
 
   // TODO make this single function 2/2
   for (var i = 0; i < stackA.length; i++) {
-    if (stackA[i].length < stackB[i].length) {
+    if (stackA[i].length > stackB[i].length) {
       min = i;
-    } else if (stackA[i].length > stackB[i].length) {
+    } else if (stackA[i].length < stackB[i].length) {
       max = i;
     }
   }
